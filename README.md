@@ -155,6 +155,7 @@ Social media can have multiple implantation or can have multiple child like Face
 
 now let’s assume Facebook want to use this features or functionality.
 
+```
 public class Facebook extends SocialMedia {
 
     public void chatWithFriend() {
@@ -173,9 +174,12 @@ public class Facebook extends SocialMedia {
         //logic  
     }
 }
+```
 
 Now let’s discuss WhatsApp class
 
+
+```
 public class WhatsApp extends SocialMedia {
     public void chatWithFriend() {
         //logic
@@ -193,6 +197,8 @@ public class WhatsApp extends SocialMedia {
         //logic
     }
 }
+```
+
 due to publishPost() method whatsapp child is not substitute of parents SocialMedia
 
 because whatsapp doesn’t support upload photos and videos for friend it’s just a chatting application so it doesn’t follow LSP
@@ -234,6 +240,7 @@ public class WhatsApp implements SocialMedia{
     }
 }
 ```
+
 ```
 public class Facebook implements SocialMedia , SocialPostAndMediaManager{
     public void chatWithFriend(){
