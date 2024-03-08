@@ -189,15 +189,13 @@ public class WhatsApp extends SocialMedia {
       //logic
     }
 
-    public void groupVideoCall(String... users) {
+    public void groupVideoCall(String users) {
         //logic
     }
 }
 due to publishPost() method whatsapp child is not substitute of parents SocialMedia
 
 because whatsapp doesn’t support upload photos and videos for friend it’s just a chatting application so it doesn’t follow LSP
-
-Similarly instagram doesn’t support groupVideoCall() feature so we say instagram child is not substitute of parents SocialMedia
 
 How to overcome this issue so that my code can follow LSP
 
@@ -208,7 +206,8 @@ create a Social media interface
 ```
 public interface SocialMedia {  
    public void chatWithFriend();
-   public void sendPhotosAndVideos()
+   public void sendPhotosAndVideos();
+   public void groupVideoCall(String users);
 }
 ```
 
@@ -218,3 +217,37 @@ public interface SocialPostAndMediaManager {
 }
 ```
 
+Now if you observe we segregate specific functionality to separate class to follow LSP
+
+now its up to implementation class decision to support features , based on their desired feature they can use respective interface
+
+```
+public class WhatsApp implements SocialMedia{
+    public void chatWithFriend(){
+       //logic
+    }
+    public void sendPhotosAndVideos(){
+       //logic
+    }
+    public void publishPost(Object post){
+       //logic
+    }
+}
+```
+```
+public class Facebook implements SocialMedia , SocialPostAndMediaManager{
+    public void chatWithFriend(){
+       //logic
+    }
+    public void sendPhotosAndVideos(){
+       //logic
+    }
+    public void publishPost(Object post){
+       //logic
+    }
+    public void groupVideoCall(String... users) {
+        //logic
+    }
+}
+```
+This is how you can design LSP.
