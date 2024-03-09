@@ -1,6 +1,6 @@
 package com.luv2code.LiskovSubstitution.bad;
 
-public class FacebookBad implements SocialMediaBad {
+public class FacebookBad extends SocialMediaBad {
 
 	@Override
 	public void chatWithFriend() {

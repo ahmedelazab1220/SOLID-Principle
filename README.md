@@ -2,6 +2,12 @@
 
 In Java, SOLID principles are an object-oriented approach that are applied to software structure design.
 
+SOLD Principles are a set of guiding philosophies for designing and developing software that aims to enhance the quality, maintainability, and overall effectiveness of software systems.
+
+![SOLD Principle](https://github.com/ahmedelazab1220/SOLID-Principle/assets/105994948/bb824413-2bd6-47e1-bd93-84708a46621f)
+
+you can clone this repo `https://github.com/ahmedelazab1220/SOLID-Principle.git` or download Zip file to understand me better
+
 # SOLID Acronym
 
 - S : Single Responsibility Principle (SRP)
@@ -16,245 +22,40 @@ In Java, SOLID principles are an object-oriented approach that are applied to so
 
 Now let’s deep dive into what all SOLID principle we have with Example
 
-# SOLID design principles
-### 1 - Single Responsibility Principle  (SRP)
+Understanding the SOLID Principles in Software Development
 
-This principle states that “a class should have only one reason to change” which means every class should have a single responsibility or single job or single purpose
+In the realm of software development, creating robust, maintainable, and scalable code is paramount. However, as projects grow in size and complexity, maintaining these qualities becomes increasingly challenging. This is where design principles come into play, guiding developers in crafting code that is easier to understand, extend, and maintain. One of the most renowned sets of design principles is the SOLID principles, introduced by Robert C. Martin (also known as Uncle Bob), which serve as a cornerstone for object-oriented design. Let's delve into each principle and explore its significance in software development.
 
-The principle can be well understood with an example. Imagine there is a class called BankService which performs following operations.
+1. Single Responsibility Principle (SRP)
 
-- Withdraw
-- Deposit
-- Print Pass Book
-- Get Loan Info
-- Send OTP
+The Single Responsibility Principle advocates for a class to have only one reason to change, meaning it should have only one responsibility. In essence, each class should encapsulate a single functionality or responsibility. This principle fosters maintainability and encourages modular design, as classes become smaller, focused, and less prone to modification.
 
-Look at folder called Single-Responsibility to understand me.
+For example, consider a class responsible for both data access and business logic. Adhering to SRP, we would split this class into two separate entities: one for data access and another for business logic. This segregation not only enhances readability and testability but also allows for independent modification of each component.
 
-Have you imagined the scenario? Here the class has multiple reasons to change.
+2. Open/Closed Principle (OCP)
 
-For example look into getLoanInterestInfo() method , now bank service provide only info for Personal Loan , Home Loan and car loan let’s say in future bank people want to provide some other loan feature like gold loan and study loan then again you need to modify this class implementation right ?
+The Open/Closed Principle emphasizes that classes should be open for extension but closed for modification. This means that once a class is implemented, its behavior should not be altered, but it should be easily extensible to accommodate new requirements. Achieving this involves designing classes in a way that allows for extension through inheritance, composition, or other means without modifying their existing code.
 
-similarly you can consider sendOTP() method , let’s assume BankService support send OTP medium as a email but in future they might want to introduced send OTP medium as Phone then again you need to change its implementation
+Using interfaces and abstract classes is a common strategy to adhere to the OCP. By defining contracts that classes can implement or extend, we facilitate the addition of new functionalities without altering existing code. This promotes code stability and minimizes the risk of introducing bugs during maintenance.
 
-it doesn’t follow single responsibility principle because this class has to many responsible or task to perform
+3. Liskov Substitution Principle (LSP)
 
-To achieve the goal of the single responsibility principle, we should implement a separate class that performs a single functionality only.
+The Liskov Substitution Principle states that objects of a superclass should be replaceable with objects of its subclasses without affecting the correctness of the program. In simpler terms, subclasses should be substitutable for their base classes without altering the desired behavior of the program. This principle ensures that inheritance hierarchies are well-designed and that polymorphism is leveraged effectively.
 
-For Example , we can move Print related code snippet to Printer Service.
+Violations of the LSP can lead to unexpected behavior and can compromise the integrity of the application. Therefore, it's crucial to adhere to this principle by carefully designing class hierarchies and ensuring that subclasses adhere to the contracts established by their superclasses.
 
-```
-public class PrinterService{
-  public void printPassbook() {
-    //update transaction info in passbook
-  }
-}  
-```
+4. Interface Segregation Principle (ISP)
 
-Similarly Loan related job
+The Interface Segregation Principle suggests that clients should not be forced to depend on interfaces they don't use. Instead of implementing large, monolithic interfaces, classes should adhere to smaller, more specific interfaces that cater to their particular needs. This prevents clients from being burdened with unnecessary dependencies and reduces the risk of interface pollution.
 
-```
-public class LoanService{
-public void getLoanInterestInfo(String loanType) {
-        if (loanType.equals("homeLoan")) {
-            //do some job
-        }
-        if (loanType.equals("personalLoan")) {
-            //do some job
-        }
-        if (loanType.equals("car")) {
-            //do some job
-        }
-    }
-}
-```
-Now if you observe Each class have single Responsibility to perform their task.
+By adhering to ISP, we promote loose coupling between components, which enhances modularity and flexibility. Clients can interact with interfaces tailored to their requirements, allowing for more granular control over dependencies and promoting code reuse.
 
-### 2- Open closed Principle (OSP)
+5. Dependency Inversion Principle (DIP)
 
-This principle states that “software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification” which means you should be able to extend a class behavior, without modifying it.
+The Dependency Inversion Principle advocates for dependency inversion, stating that high-level modules should not depend on low-level modules. Both should depend on abstractions, and abstractions should not depend on details. This principle encourages decoupling between modules by introducing interfaces or abstract classes that serve as contracts between them.
 
-let’s understand this principle with an example .let’s consider the same Notification service which we just created.
+By relying on abstractions rather than concrete implementations, DIP facilitates flexibility, extensibility, and testability. It allows for interchangeable components, making it easier to swap implementations or introduce new functionalities without affecting the overall system architecture.
 
-```
-public class OTPService{
-public void sendOTP(String medium) {
-        if (medium.equals("email")) {
-            //write email related logic
-            //use JavaMailSenderAPI
-        }
-    }
-}
-```
+Conclusion
 
-Here as discussed earlier if you want to introduced send OTP via mobile Phone or WhatsApp number then you need to modify source code in Notification Service right?
-
-Here What OCP says , It open for Extension but close for modification hence its not recommended to modify Notification Service for each OTP Feature , it will violate OCP
-
-So to overcome this you need to design your code in such a way that everyone can reuse your feature by just extending it and if they need any customization they can extend it and add their feature on top of it like a abstraction .
-
-You can design something like below.
-
-```
-public interface NotificationService{
-   public void sendOTP(String medium);
-}
-```
-
-EmailNotification implantation
-
-```
-public class EmailNotification implements NotificationService{
-    public void sendOTP(String medium){
-      // write Logic using JavaEmail api 
-    }
-}
-```
-Mobile Notification implementation
-
-```
-public class MobileNotification implements NotificationService{
-    public void sendOTP(String medium){
-       // write Logic using Twilio SMS API 
-    }
-}
-```
-
-similarly you can add implementation for WhatsApp notification service
-
-```
-public class WhatsAppNotification implements NotificationService{
-    public void sendOTP(String medium){
-       // write Logic using whatsapp API
-    }
-}
-```
-
-Liskov substitution Principle (LSP)
-
-This principle states that “Derived or child classes must be substitutable for their base or parent classes”. In other words, if class A is a subtype of class B, then we should be able to replace B with A without interrupting the behavior of the program.
-
-This principle is bit tricky and interesting all it designed based on Inheritance concepts ,so let’s better understand this with an example
-
-Let’s consider I have an abstract class called SocialMedia , who supported all social media activity for user to entertain them like below.
-
-```
-public interface SocialMedia {
-    
-    public void chatWithFriend();
-    
-    public void publishPost(Object post);
-    
-    public void sendPhotosAndVideos();
-    
-    public void groupVideoCall(String... users);
-}
-```
-
-Social media can have multiple implantation or can have multiple child like Facebook, WhatsApp ,instagram and Twitter etc..
-
-now let’s assume Facebook want to use this features or functionality.
-
-```
-public class Facebook extends SocialMedia {
-
-    public void chatWithFriend() {
-        //logic  
-    }
-
-    public void publishPost(Object post) {
-        //logic  
-    }
-
-    public void sendPhotosAndVideos() {
-        //logic  
-    }
-
-    public void groupVideoCall(String... users) {
-        //logic  
-    }
-}
-```
-
-Now let’s discuss WhatsApp class
-
-
-```
-public class WhatsApp extends SocialMedia {
-    public void chatWithFriend() {
-        //logic
-    }
-
-    public void publishPost(Object post) {
-      //Not Applicable
-    }
-
-    public void sendPhotosAndVideos() {
-      //logic
-    }
-
-    public void groupVideoCall(String users) {
-        //logic
-    }
-}
-```
-
-due to publishPost() method whatsapp child is not substitute of parents SocialMedia
-
-because whatsapp doesn’t support upload photos and videos for friend it’s just a chatting application so it doesn’t follow LSP
-
-How to overcome this issue so that my code can follow LSP
-
-solution
-
-create a Social media interface
-
-```
-public interface SocialMedia {  
-   public void chatWithFriend();
-   public void sendPhotosAndVideos();
-   public void groupVideoCall(String users);
-}
-```
-
-```
-public interface SocialPostAndMediaManager { 
-    public void publishPost(Object post);
-}
-```
-
-Now if you observe we segregate specific functionality to separate class to follow LSP
-
-now its up to implementation class decision to support features , based on their desired feature they can use respective interface
-
-```
-public class WhatsApp implements SocialMedia{
-    public void chatWithFriend(){
-       //logic
-    }
-    public void sendPhotosAndVideos(){
-       //logic
-    }
-    public void publishPost(Object post){
-       //logic
-    }
-}
-```
-
-```
-public class Facebook implements SocialMedia , SocialPostAndMediaManager{
-    public void chatWithFriend(){
-       //logic
-    }
-    public void sendPhotosAndVideos(){
-       //logic
-    }
-    public void publishPost(Object post){
-       //logic
-    }
-    public void groupVideoCall(String... users) {
-        //logic
-    }
-}
-```
-This is how you can design LSP.
+The SOLID principles provide a solid foundation for creating well-structured, maintainable, and scalable software. By adhering to these principles, developers can craft code that is modular, flexible, and resilient to changes. While implementing these principles requires careful consideration and discipline, the benefits they offer in terms of code quality and maintainability make them invaluable assets in the arsenal of any software developer. As Uncle Bob aptly stated, "The only way to go fast is to go well." Embracing SOLID principles ensures that our code not only goes fast but also stands the test of time , Thank you.

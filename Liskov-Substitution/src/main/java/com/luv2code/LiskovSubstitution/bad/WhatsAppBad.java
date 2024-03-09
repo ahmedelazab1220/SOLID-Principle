@@ -1,6 +1,6 @@
 package com.luv2code.LiskovSubstitution.bad;
 
-public class WhatsAppBad implements SocialMediaBad {
+public class WhatsAppBad extends SocialMediaBad {
 
 	@Override
 	public void chatWithFriend() {

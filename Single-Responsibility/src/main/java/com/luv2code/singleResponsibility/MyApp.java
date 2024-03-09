@@ -2,9 +2,7 @@ package com.luv2code.singleResponsibility;
 
 import com.luv2code.singleResponsibility.bad.BankServiceBad;
 import com.luv2code.singleResponsibility.good.DepositService;
-import com.luv2code.singleResponsibility.good.DepositServiceImpl;
 import com.luv2code.singleResponsibility.good.WithDrawService;
-import com.luv2code.singleResponsibility.good.WithDrawServiceImpl;
 
 public class MyApp {
 
@@ -24,10 +22,10 @@ public class MyApp {
         System.out.println("\nGood Example\n");
         
         // let's try test-good example
-        DepositService depositService = new DepositServiceImpl();
+        DepositService depositService = new DepositService();
         depositService.deposit(1000, account);
         
-        WithDrawService withDrawService = new WithDrawServiceImpl();
+        WithDrawService withDrawService = new WithDrawService();
         withDrawService.withDraw(500, account);
         
 	}
