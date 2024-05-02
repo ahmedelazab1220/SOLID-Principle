@@ -1,6 +1,5 @@
 package com.luv2code.openClosed.good;
 
-
 public class EmailOtpServiceGoodImpl implements GoodOtpService {
 
 	@Override

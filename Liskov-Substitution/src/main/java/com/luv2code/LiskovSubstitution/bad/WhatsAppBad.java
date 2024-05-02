@@ -9,7 +9,7 @@ public class WhatsAppBad extends SocialMediaBad {
 
 	@Override
 	public void publishPost(Object post) {
-        // I'm Not Use This Feature In WhatsApp
+		// I'm Not Use This Feature In WhatsApp
 	}
 
 	@Override

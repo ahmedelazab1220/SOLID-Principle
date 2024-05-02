@@ -15,20 +15,20 @@ public class MyApp {
 		System.out.println("Bad Example\n");
 
 		BadOtpService badOtpService = new OtpServiceIBadImpl();
-		
+
 		badOtpService.sendOTP("email");
 		badOtpService.sendOTP("WhatsApp");
 
 		System.out.println("\nGood Example\n");
 
 		// let's try test-good example
-		
+
 		GoodOtpService goodOtpServiceByEmail = new EmailOtpServiceGoodImpl();
-		
+
 		goodOtpServiceByEmail.sendOTP();
 
 		GoodOtpService goodOtpServiceByWhatsApp = new WhatsAppOtpServiceGoodImpl();
-		
+
 		goodOtpServiceByWhatsApp.sendOTP();
 	}
 
