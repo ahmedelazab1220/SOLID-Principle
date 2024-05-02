@@ -38,7 +38,7 @@ public class MyApp {
 		whatsAppGood.chatWithFriend();
 
 		// when make this line give error because this function not found in class
-		// whatsApp
+		// whatsApp.
 		// whatsAppGood.publishPost(whatsAppGood);
 
 	}
