@@ -14,27 +14,27 @@ public class MyApp {
 		// Let's try test-bad example
 
 		System.out.println("Bad Example\n");
-		
+
 		UpiPaymentsBad paymentGoogleBad = new GooglePayBad();
-		
+
 		paymentGoogleBad.getCashBackAsCreditBalance();
-		
-        UpiPaymentsBad paymentPaytmBad = new PaytmBad();
-		
-        paymentPaytmBad.getCashBackAsCreditBalance();
-		
-        // let's try test-good example
-        
+
+		UpiPaymentsBad paymentPaytmBad = new PaytmBad();
+
+		paymentPaytmBad.getCashBackAsCreditBalance();
+
+		// let's try test-good example
+
 		System.out.println("\nGood Example\n");
-		
+
 		UpiPaymentsGood paymentGoogleGood = new GooglePayGood();
-		
+
 		paymentGoogleGood.getScratchCard();
-		
+
 		UpiPaymentsGood paymentPaytmGood = new PaytmGood();
-		
+
 		paymentPaytmGood.getScratchCard();
-		
+
 	}
 
 }

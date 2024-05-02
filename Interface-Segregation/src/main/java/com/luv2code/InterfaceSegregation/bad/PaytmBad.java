@@ -5,7 +5,7 @@ public class PaytmBad implements UpiPaymentsBad {
 	@Override
 	public void payMoney() {
 		System.out.println("Pay Money By Paytm!");
-		// do logic code 
+		// do logic code
 	}
 
 	@Override
